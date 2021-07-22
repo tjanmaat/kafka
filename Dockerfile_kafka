@@ -1,0 +1,3 @@
+FROM confluentinc/cp-kafka:latest
+
+ENTRYPOINT [ "python", "/home/appuser/scripts/main.py" ]

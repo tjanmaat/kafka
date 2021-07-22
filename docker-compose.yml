@@ -9,11 +9,13 @@ services:
       - 22181:2181
 
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: kafka:latest
     depends_on:
       - zookeeper
     ports:
       - 29092:29092
+    volumes:
+      - ./scripts:/home/appuser/scripts
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
