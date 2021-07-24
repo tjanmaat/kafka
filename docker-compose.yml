@@ -40,5 +40,14 @@ services:
       - ./scripts:/home/appuser/scripts
     entrypoint: [ "python", "/home/appuser/scripts/consumer_producer_parse_recipes.py" ]
 
+  client3:
+    image: producer:latest
+    container_name: python_producer3
+    depends_on:
+      - kafka
+    volumes:
+      - ./scripts:/home/appuser/scripts
+    entrypoint: [ "python", "/home/appuser/scripts/consumer_alert.py" ]
+
 # TODO: add more brokers and zookeepers for resilience,
 # as hinted at in https://www.baeldung.com/ops/kafka-docker-setup section 3.1
