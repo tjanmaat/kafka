@@ -8,4 +8,4 @@ RUN pip install \
     lxml \
     requests
 
-ENTRYPOINT [ "python", "/home/appuser/scripts/main.py" ]
+ENTRYPOINT [ "python", "/home/appuser/scripts/producer_raw_recipes.py" ]
