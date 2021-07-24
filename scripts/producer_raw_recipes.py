@@ -32,11 +32,9 @@ def get_recipes(headers):
         if r.status_code == 200:
             html = r.text
             soup = BeautifulSoup(html, 'lxml')
-            links = soup.find_all(href=re.compile("https://www.allrecipes.com/recipe/"))
+            links = soup.find_all("a", class_=re.compile("category-page-item-image-text"))
             idx = 0
-            print(len(links))
-            # TODO: this does not work yet, but also does not produce logs. Find out why
-            for iterator in range(5):
+            for iterator in range(len(links)):
                 link = links[iterator]
                 print(link)
 
@@ -68,7 +66,7 @@ def publish_message(producer_instance, topic_name, key, value):
 def connect_kafka_producer():
     _producer = None
     try:
-        _producer = KafkaProducer(bootstrap_servers=['localhost:9092'], api_version=(0, 10))
+        _producer = KafkaProducer(bootstrap_servers=['kafka:9092'], api_version=(0, 10))
     except Exception as ex:
         print('Exception while connecting Kafka')
         print(str(ex))
