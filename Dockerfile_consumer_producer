@@ -1,0 +1,10 @@
+FROM python
+
+# install dependencies
+# TODO: add req.txt
+RUN pip install \
+    beautifulsoup4 \
+    kafka-python  \
+    json
+
+ENTRYPOINT [ "python", "/home/appuser/scripts/consumer_producer_parse_recipes.py" ]
