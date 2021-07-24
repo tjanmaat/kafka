@@ -7,5 +7,3 @@ RUN pip install \
     kafka-python  \
     lxml \
     requests
-
-ENTRYPOINT [ "python", "/home/appuser/scripts/producer_raw_recipes.py" ]
