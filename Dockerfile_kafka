@@ -1,7 +1,11 @@
-FROM confluentinc/cp-kafka:latest
+FROM python
 
 # install dependencies
 # TODO: add req.txt
-RUN pip install beautifulsoup4 kafka-python lxml
+RUN pip install \
+    beautifulsoup4 \
+    kafka-python  \
+    lxml \
+    requests
 
 ENTRYPOINT [ "python", "/home/appuser/scripts/main.py" ]
