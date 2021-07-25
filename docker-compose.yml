@@ -24,30 +24,32 @@ services:
 
   client1:
     image: producer:latest
-    container_name: python_producer1
+    container_name: python_producer_1
     depends_on:
       - kafka
     volumes:
       - ./scripts:/home/appuser/scripts
-    entrypoint: [ "python", "/home/appuser/scripts/producer_raw_recipes.py" ]
+    entrypoint: [ "python", "/home/appuser/scripts/producer_wiki_recent_changes.py" ]
 
   client2:
     image: producer:latest
-    container_name: python_producer2
+    container_name: python_consumer_1
     depends_on:
       - kafka
     volumes:
       - ./scripts:/home/appuser/scripts
-    entrypoint: [ "python", "/home/appuser/scripts/consumer_producer_parse_recipes.py" ]
+      - ./data:/home/appuser/data
+    entrypoint: [ "python", "/home/appuser/scripts/consumer_wiki_spark.py" ]
 
   client3:
     image: producer:latest
-    container_name: python_producer3
+    container_name: python_consumer_2
     depends_on:
       - kafka
     volumes:
       - ./scripts:/home/appuser/scripts
-    entrypoint: [ "python", "/home/appuser/scripts/consumer_alert.py" ]
+      - ./data:/home/appuser/data
+    entrypoint: [ "python", "/home/appuser/scripts/consumer_spark_visualisation.py" ]
 
 # TODO: add more brokers and zookeepers for resilience,
 # as hinted at in https://www.baeldung.com/ops/kafka-docker-setup section 3.1

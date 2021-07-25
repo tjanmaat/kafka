@@ -4,7 +4,6 @@ FROM jupyter/pyspark-notebook
 # install dependencies
 # TODO: add req.txt
 RUN pip install \
-    beautifulsoup4 \
     kafka-python  \
-    lxml \
-    requests
+    sseclient \
+    pyspark
