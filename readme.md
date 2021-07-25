@@ -1,7 +1,8 @@
 # Kafka Introduction
-This project contains a simple application that draws and transforms data from a stream with data
+This project contains a python simple application that draws and transforms data from a stream with data
  on the latest changes to Wikipedia.
 It was made to get familiar with Kafka and Spark, which are used in this project. 
+Some notes on the process of making this project can be found in `notebook/process_notes.ipynb`. 
 
 ## Usage
 This project runs in a (few) Docker containers. 
