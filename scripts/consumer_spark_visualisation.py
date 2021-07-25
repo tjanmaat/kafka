@@ -1,13 +1,9 @@
-from time import sleep
-
 from pyspark.sql.types import StringType, StructType, StructField, IntegerType
 from pyspark.sql.functions import window, col, current_timestamp, to_json, struct, from_json, to_timestamp, \
     from_unixtime
 from common import get_stream_dataframe_from_kafka_topic, get_spark_session
 
-import seaborn as sns
-import matplotlib
-import matplotlib.pyplot as plt
+from ksql import KSQLAPI
 
 
 def create_event_schema():
@@ -56,6 +52,10 @@ if __name__ == '__main__':
                                                              spark)
     # Format stream dataframe
     df_formatted = format_stream_dataframe(stream_dataframe)
+
+    client = KSQLAPI('http://0.0.0.0:8088')
+
+    client.ksql('show topics')
 
     query = (df_formatted
              .writeStream

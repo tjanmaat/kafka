@@ -6,4 +6,5 @@ FROM jupyter/pyspark-notebook
 RUN pip install \
     kafka-python  \
     sseclient \
-    pyspark
+    pyspark \
+    ksql

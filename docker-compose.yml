@@ -46,10 +46,26 @@ services:
     container_name: python_consumer_2
     depends_on:
       - kafka
+      - ksqldb-server
     volumes:
       - ./scripts:/home/appuser/scripts
       - ./data:/home/appuser/data
     entrypoint: [ "python", "/home/appuser/scripts/consumer_spark_visualisation.py" ]
+
+  ksqldb-server:
+    image: confluentinc/ksqldb-server:0.19.0
+    hostname: ksqldb-server
+    container_name: ksqldb-server
+    depends_on:
+      - kafka
+    volumes:
+      - ./sql:/home/appuser/sql
+    ports:
+      - "8088:8088"
+    environment:
+      KSQL_LISTENERS: "http://0.0.0.0:8088"
+      KSQL_BOOTSTRAP_SERVERS: "kafka:9092"
+      KSQL_LOG4J_ROOT_LOGLEVEL: "WARN"
 
 # TODO: add more brokers and zookeepers for resilience,
 # as hinted at in https://www.baeldung.com/ops/kafka-docker-setup section 3.1
