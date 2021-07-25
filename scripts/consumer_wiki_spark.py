@@ -58,7 +58,6 @@ def format_stream_dataframe(dataframe):
     return (df_wiki.select(
         col("key").alias("event_key")
         , col("topic").alias("event_topic")
-        , col("timestamp").alias("event_timestamp")
         , to_timestamp(from_unixtime(col("value.timestamp"))).alias("change_timestamp")
         , "value.bot"
         , "value.user"
@@ -87,7 +86,7 @@ def start_query_stream(dataframe, kafka_server, checkpoint_path):
             .outputMode("complete")
             .format("kafka")
             .option("kafka.bootstrap.servers", kafka_server)  # kafka server
-            .option("topic", "wiki_formatted")
+            .option("topic", "wiki-formatted")
             .option("checkpointLocation", checkpoint_path)
             .start())
 
